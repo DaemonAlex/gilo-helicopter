@@ -96,7 +96,7 @@ GiloHeli.ToggleUIKey = "F7"                -- Cycle UI display modes
 -- NOTIFICATION SYSTEM
 -- ============================================================================
 
-function Notifications(text)
+function GiloHeli.Notify(text)
     -- ox_lib (recommended)
     if GetResourceState('ox_lib') == 'started' then
         lib.notify({ description = text, type = 'inform' })
@@ -131,7 +131,7 @@ end
 -- LANGUAGE SETTINGS
 -- ============================================================================
 
-GiloHeli.Lenguage = "en"                   -- "en" for English, "it" for Italian
+GiloHeli.Language = "en"                   -- "en" for English, "it" for Italian
 
 GiloHeli.Translations = {
     -- ========================================================================

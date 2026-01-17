@@ -93,18 +93,18 @@ end
 -- ============================================================================
 
 CreateThread(function()
-    RegisterKeyMapping('HeliCam', GiloHeli.Translations[GiloHeli.Lenguage]["active_heli_cam"], 'keyboard', GiloHeli.ActiveCamKey)
-    RegisterKeyMapping('HeliSeatbelt', GiloHeli.Translations[GiloHeli.Lenguage]["seatbelt"], 'keyboard', GiloHeli.SeatbeltKey)
-    RegisterKeyMapping('HeliRappel', GiloHeli.Translations[GiloHeli.Lenguage]["rappel"], 'keyboard', GiloHeli.RappelKey)
-    RegisterKeyMapping('HeliLights', GiloHeli.Translations[GiloHeli.Lenguage]["lights"], 'keyboard', GiloHeli.LightsKey)
-    RegisterKeyMapping('HeliHover', GiloHeli.Translations[GiloHeli.Lenguage]["hover"], 'keyboard', GiloHeli.HoverKey)
-    RegisterKeyMapping('HeliSuperHover', GiloHeli.Translations[GiloHeli.Lenguage]["super"], 'keyboard', GiloHeli.SuperHoverKey)
-    RegisterKeyMapping('HeliHelp', GiloHeli.Translations[GiloHeli.Lenguage]["help"], 'keyboard', GiloHeli.HelpKey)
-    RegisterKeyMapping('HeliSpotlightFollow', GiloHeli.Translations[GiloHeli.Lenguage]["spotlight_follow"] or "Toggle Spotlight Follow", 'keyboard', GiloHeli.SpotlightFollowKey or "L")
-    RegisterKeyMapping('HeliToggleUI', GiloHeli.Translations[GiloHeli.Lenguage]["toggle_ui"] or "Toggle UI Elements", 'keyboard', GiloHeli.ToggleUIKey or "F7")
+    RegisterKeyMapping('HeliCam', GiloHeli.Translations[GiloHeli.Language]["active_heli_cam"], 'keyboard', GiloHeli.ActiveCamKey)
+    RegisterKeyMapping('HeliSeatbelt', GiloHeli.Translations[GiloHeli.Language]["seatbelt"], 'keyboard', GiloHeli.SeatbeltKey)
+    RegisterKeyMapping('HeliRappel', GiloHeli.Translations[GiloHeli.Language]["rappel"], 'keyboard', GiloHeli.RappelKey)
+    RegisterKeyMapping('HeliLights', GiloHeli.Translations[GiloHeli.Language]["lights"], 'keyboard', GiloHeli.LightsKey)
+    RegisterKeyMapping('HeliHover', GiloHeli.Translations[GiloHeli.Language]["hover"], 'keyboard', GiloHeli.HoverKey)
+    RegisterKeyMapping('HeliSuperHover', GiloHeli.Translations[GiloHeli.Language]["super"], 'keyboard', GiloHeli.SuperHoverKey)
+    RegisterKeyMapping('HeliHelp', GiloHeli.Translations[GiloHeli.Language]["help"], 'keyboard', GiloHeli.HelpKey)
+    RegisterKeyMapping('HeliSpotlightFollow', GiloHeli.Translations[GiloHeli.Language]["spotlight_follow"] or "Toggle Spotlight Follow", 'keyboard', GiloHeli.SpotlightFollowKey or "L")
+    RegisterKeyMapping('HeliToggleUI', GiloHeli.Translations[GiloHeli.Language]["toggle_ui"] or "Toggle UI Elements", 'keyboard', GiloHeli.ToggleUIKey or "F7")
     if GiloHeli.EnableMarkers then
-        RegisterKeyMapping('HeliMarker', GiloHeli.Translations[GiloHeli.Lenguage]["place_marker"] or "Place Tactical Marker", 'keyboard', GiloHeli.MarkerKey or "G")
-        RegisterKeyMapping('HeliMarkerType', GiloHeli.Translations[GiloHeli.Lenguage]["cycle_marker"] or "Cycle Marker Type", 'keyboard', GiloHeli.MarkerTypeKey or "Z")
+        RegisterKeyMapping('HeliMarker', GiloHeli.Translations[GiloHeli.Language]["place_marker"] or "Place Tactical Marker", 'keyboard', GiloHeli.MarkerKey or "G")
+        RegisterKeyMapping('HeliMarkerType', GiloHeli.Translations[GiloHeli.Language]["cycle_marker"] or "Cycle Marker Type", 'keyboard', GiloHeli.MarkerTypeKey or "Z")
     end
 end)
 
@@ -118,19 +118,19 @@ RegisterCommand("HeliToggleUI", function()
     -- Cycle through UI modes: All -> No Speed -> No Street -> Minimal -> All
     if showSpeed and showStreetName then
         showSpeed = false
-        Notifications("UI: Speed hidden")
+        GiloHeli.Notify("UI: Speed hidden")
     elseif not showSpeed and showStreetName then
         showSpeed = true
         showStreetName = false
-        Notifications("UI: Street hidden")
+        GiloHeli.Notify("UI: Street hidden")
     elseif showSpeed and not showStreetName then
         showSpeed = false
         showStreetName = false
-        Notifications("UI: Minimal mode")
+        GiloHeli.Notify("UI: Minimal mode")
     else
         showSpeed = true
         showStreetName = true
-        Notifications("UI: All elements visible")
+        GiloHeli.Notify("UI: All elements visible")
     end
     PlaySoundFrontend(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", false)
 end, false)
@@ -144,9 +144,9 @@ RegisterCommand("HeliSpotlightFollow", function()
 
     spotlightFollowCam = not spotlightFollowCam
     if spotlightFollowCam then
-        Notifications(GiloHeli.Translations[GiloHeli.Lenguage]["spotlight_follow_on"] or "Spotlight follows camera")
+        GiloHeli.Notify(GiloHeli.Translations[GiloHeli.Language]["spotlight_follow_on"] or "Spotlight follows camera")
     else
-        Notifications(GiloHeli.Translations[GiloHeli.Lenguage]["spotlight_follow_off"] or "Spotlight manual mode")
+        GiloHeli.Notify(GiloHeli.Translations[GiloHeli.Language]["spotlight_follow_off"] or "Spotlight manual mode")
     end
     PlaySoundFrontend(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", false)
 end, false)
@@ -171,15 +171,15 @@ RegisterCommand("HeliHelp", function()
                 So = super == 1 and "~g~ON" or "~r~OFF"
 
                 MessaggioAiuto(
-                    GiloHeli.Translations[GiloHeli.Lenguage]["cam"] .. Ca .. "\n~w~" ..
-                    GiloHeli.Translations[GiloHeli.Lenguage]["seatbelt_help"] .. Ci .. "\n~w~" ..
-                    GiloHeli.Translations[GiloHeli.Lenguage]["hovering_help"] .. Ho .. "\n~w~" ..
-                    GiloHeli.Translations[GiloHeli.Lenguage]["superhovering_help"] .. So,
+                    GiloHeli.Translations[GiloHeli.Language]["cam"] .. Ca .. "\n~w~" ..
+                    GiloHeli.Translations[GiloHeli.Language]["seatbelt_help"] .. Ci .. "\n~w~" ..
+                    GiloHeli.Translations[GiloHeli.Language]["hovering_help"] .. Ho .. "\n~w~" ..
+                    GiloHeli.Translations[GiloHeli.Language]["superhovering_help"] .. So,
                     false, true, 8000
                 )
 
                 if GiloHeli.ViewCommandsHelp then
-                    AddTextEntry('HelpText', GiloHeli.Translations[GiloHeli.Lenguage]["help_text"])
+                    AddTextEntry('HelpText', GiloHeli.Translations[GiloHeli.Language]["help_text"])
                     local coords = GetEntityCoords(PlayerPedId())
                     SetFloatingHelpTextWorldPosition(1, coords.x - 7, coords.y + 5, coords.z)
                     SetFloatingHelpTextStyle(1, 1, 2, -1, 3, 0)
@@ -202,7 +202,7 @@ RegisterCommand("HeliSuperHover", function()
 
     if super == 1 then
         super = 0
-        MessaggioAiuto(GiloHeli.Translations[GiloHeli.Lenguage]["hover_off"], false, true, 8000)
+        MessaggioAiuto(GiloHeli.Translations[GiloHeli.Language]["hover_off"], false, true, 8000)
         return
     end
 
@@ -210,14 +210,14 @@ RegisterCommand("HeliSuperHover", function()
     local currentSpeed = GetVehicleSpeedKmh(vehicle)
 
     if currentSpeed > GiloHeli.SuperHoverMaxSpeed then
-        Notifications(GiloHeli.Translations[GiloHeli.Lenguage]["too_fast"])
+        GiloHeli.Notify(GiloHeli.Translations[GiloHeli.Language]["too_fast"])
         PlaySoundFrontend(-1, "5_Second_Timer", "DLC_HEISTS_GENERAL_FRONTEND_SOUNDS", false)
         return
     end
 
     super = 1
     CreateThread(function()
-        MessaggioAiuto(GiloHeli.Translations[GiloHeli.Lenguage]["hover_on"], false, true, 8000)
+        MessaggioAiuto(GiloHeli.Translations[GiloHeli.Language]["hover_on"], false, true, 8000)
         while super == 1 and GetHeliMainRotorHealth(vehicle) > 0 and GetHeliTailRotorHealth(vehicle) > 0 and GetVehicleEngineHealth(vehicle, true) > 300 do
             Wait(0)
             SetEntityVelocity(vehicle, 0.0, 0.0, 0.0)
@@ -225,7 +225,7 @@ RegisterCommand("HeliSuperHover", function()
         end
         if super == 1 then
             super = 0
-            MessaggioAiuto(GiloHeli.Translations[GiloHeli.Lenguage]["hover_off"], false, true, 8000)
+            MessaggioAiuto(GiloHeli.Translations[GiloHeli.Language]["hover_off"], false, true, 8000)
         end
     end)
 end, false)
@@ -235,7 +235,7 @@ RegisterCommand("HeliHover", function()
 
     if hover == 1 then
         hover = 0
-        MessaggioAiuto(GiloHeli.Translations[GiloHeli.Lenguage]["hover_off"], false, true, 8000)
+        MessaggioAiuto(GiloHeli.Translations[GiloHeli.Language]["hover_off"], false, true, 8000)
         return
     end
 
@@ -243,7 +243,7 @@ RegisterCommand("HeliHover", function()
     local vehicle = GetVehiclePedIsIn(PlayerPedId(), true)
 
     CreateThread(function()
-        MessaggioAiuto(GiloHeli.Translations[GiloHeli.Lenguage]["hover_on"], false, true, 8000)
+        MessaggioAiuto(GiloHeli.Translations[GiloHeli.Language]["hover_on"], false, true, 8000)
         while hover == 1 and GetHeliMainRotorHealth(vehicle) > 0 and GetHeliTailRotorHealth(vehicle) > 0 and GetVehicleEngineHealth(vehicle, true) > 300 do
             Wait(0)
             local velocity = GetEntityVelocity(vehicle)
@@ -252,7 +252,7 @@ RegisterCommand("HeliHover", function()
         end
         if hover == 1 then
             hover = 0
-            MessaggioAiuto(GiloHeli.Translations[GiloHeli.Lenguage]["hover_off"], false, true, 8000)
+            MessaggioAiuto(GiloHeli.Translations[GiloHeli.Language]["hover_off"], false, true, 8000)
         end
     end)
 end, false)
@@ -271,7 +271,7 @@ RegisterCommand("HeliLights", function()
     local isCoPilot = GetPedInVehicleSeat(vehicle, 0) == PlayerPedId()
 
     if not isPilot and not isCoPilot and not GiloHeli.AllowPassengerSpotlight then
-        Notifications(GiloHeli.Translations[GiloHeli.Lenguage]["pilot_only"] or "Only pilot/co-pilot can control spotlight")
+        GiloHeli.Notify(GiloHeli.Translations[GiloHeli.Language]["pilot_only"] or "Only pilot/co-pilot can control spotlight")
         return
     end
 
@@ -303,7 +303,7 @@ RegisterCommand("HeliSeatbelt", function()
 
     if cintura == 0 then
         cintura = 1
-        Notifications(GiloHeli.Translations[GiloHeli.Lenguage]["seatbelt_on"])
+        GiloHeli.Notify(GiloHeli.Translations[GiloHeli.Language]["seatbelt_on"])
         CreateThread(function()
             while cintura == 1 do
                 Wait(0)
@@ -313,7 +313,7 @@ RegisterCommand("HeliSeatbelt", function()
         end)
     else
         cintura = 0
-        Notifications(GiloHeli.Translations[GiloHeli.Lenguage]["seatbelt_off"])
+        GiloHeli.Notify(GiloHeli.Translations[GiloHeli.Language]["seatbelt_off"])
     end
 end, false)
 
@@ -334,11 +334,11 @@ RegisterCommand("HeliRappel", function()
     end
 
     if seat then
-        Notifications(GiloHeli.Translations[GiloHeli.Lenguage]["prepare_rope"])
+        GiloHeli.Notify(GiloHeli.Translations[GiloHeli.Language]["prepare_rope"])
         PlaySoundFrontend(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", false)
         TaskRappelFromHeli(PlayerPedId(), 1)
     else
-        Notifications(GiloHeli.Translations[GiloHeli.Lenguage]["not_possible"])
+        GiloHeli.Notify(GiloHeli.Translations[GiloHeli.Language]["not_possible"])
         PlaySoundFrontend(-1, "5_Second_Timer", "DLC_HEISTS_GENERAL_FRONTEND_SOUNDS", false)
     end
 end, false)
@@ -356,7 +356,7 @@ RegisterCommand("HeliMarkerType", function()
     end
 
     local markerInfo = MarkerTypes[currentMarkerType]
-    Notifications("Marker: ~y~" .. markerInfo.name)
+    GiloHeli.Notify("Marker: ~y~" .. markerInfo.name)
     PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FREEMODE_SOUNDSET", false)
 end, false)
 
@@ -542,7 +542,7 @@ function ActivateHeliCam()
         if GiloHeli.EnableMarkers and IsControlJustPressed(0, toggle_marker_type) then
             currentMarkerType = currentMarkerType + 1
             if currentMarkerType > #MarkerTypes then currentMarkerType = 1 end
-            Notifications("Marker: ~y~" .. MarkerTypes[currentMarkerType].name)
+            GiloHeli.Notify("Marker: ~y~" .. MarkerTypes[currentMarkerType].name)
             PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FREEMODE_SOUNDSET", false)
         end
 
@@ -557,7 +557,7 @@ function ActivateHeliCam()
                     local vehCoords = GetEntityCoords(locked_on_vehicle)
                     SetWaypointToCoords(vehCoords)
                     waypointSet = true
-                    Notifications(GiloHeli.Translations[GiloHeli.Lenguage]["waypoint_set"] or "Waypoint set to target")
+                    GiloHeli.Notify(GiloHeli.Translations[GiloHeli.Language]["waypoint_set"] or "Waypoint set to target")
                 end
 
                 -- ALPR Integration - scan after lock-on time
@@ -666,7 +666,7 @@ function TriggerALPRScan(plate, vehicle)
     local vehName = GetLabelText(GetDisplayNameFromVehicleModel(model))
 
     -- Notify player
-    Notifications(GiloHeli.Translations[GiloHeli.Lenguage]["alpr_scanned"] or ("ALPR: " .. plate .. " scanned"))
+    GiloHeli.Notify(GiloHeli.Translations[GiloHeli.Language]["alpr_scanned"] or ("ALPR: " .. plate .. " scanned"))
     PlaySoundFrontend(-1, "TENNIS_MATCH_POINT", "HUD_AWARDS", false)
 
     -- Trigger dispatch/MDT integration
@@ -851,7 +851,7 @@ function PlaceMarkerFromCamera(cam)
     if hit then
         TriggerServerEvent('gilo:placeMarker', hitCoords, currentMarkerType)
         PlaySoundFrontend(-1, "WAYPOINT_SET", "HUD_FRONTEND_DEFAULT_SOUNDSET", false)
-        Notifications(MarkerTypes[currentMarkerType].label .. " placed")
+        GiloHeli.Notify(MarkerTypes[currentMarkerType].label .. " placed")
     end
 end
 

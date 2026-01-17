@@ -442,16 +442,15 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 
 ## Credits
 
-**Original Author:** GiloHeliPNC (TheInteger)
+- **Original Author:** TheInteger (GiloHeliPNC)
+- **Enhanced Edition:** DaemonAlex (v2.0+)
 
 **Gilo Modding**
 - Discord: https://discord.gg/tEaUMEUSVq
 - Tebex: https://gilo-modding.tebex.io/
 
-**Enhanced Edition:** Optimized for Tier-1 RP servers
-
 ---
 
 ## License
 
-Free to use and modify. Credit to original author appreciated.
+Distributed under the MIT License. See `LICENSE` for more information.

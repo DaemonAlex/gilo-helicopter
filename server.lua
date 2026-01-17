@@ -102,8 +102,8 @@ local function IsPlayerPolice(source)
         return true
     end
 
-    -- Default allow (for standalone)
-    return true
+    -- Default deny (for security - require explicit permission)
+    return false
 end
 
 -- Get all online police players
