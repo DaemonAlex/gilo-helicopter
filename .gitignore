@@ -1,0 +1,17 @@
+# FiveM
+*.bak
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Misc
+*.zip
+*.rar
